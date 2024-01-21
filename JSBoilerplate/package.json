@@ -5,7 +5,7 @@
   "author": "Surbhi Kohli",
   "license": "MIT",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack  --config webpack.config.js"
   },
   "devDependencies": {
     "webpack": "^5.89.0",
