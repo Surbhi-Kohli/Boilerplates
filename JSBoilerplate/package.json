@@ -1,0 +1,14 @@
+{
+  "name": "JSBoilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Surbhi Kohli",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
