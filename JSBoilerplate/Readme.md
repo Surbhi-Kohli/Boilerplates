@@ -11,3 +11,9 @@
 - Created webpack.config.js
 - Added some basic configuration
 - Modified package.json, so that webpack uses our config file
+
+## Commit 3:
+Add first loaders to handle css
+- Installed style-loader and css-loader
+- Configured webpack.config to use both loaders on css files
+- Remember the order we use them in webpack.config matters
