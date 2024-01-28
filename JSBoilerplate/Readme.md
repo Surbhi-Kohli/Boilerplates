@@ -45,3 +45,11 @@ module.exports = {
 - We created a template file that we passed in called template.html
 - We deleted the original index.html because we don't need it anymore
 - Make sure you are opening dist/index.html now to view the app
+
+
+## Commit 5:
+- Broke our webpack.config file into 3 files
+- webpack.config.js, webpack.development.js, and webpack.production.js
+- installed webpack-merge to share the common functionality
+- installed webpack-dev-server and added it to start script in package.json, so that we dont have to run ``yarn dev``
+everytime we do a change.
