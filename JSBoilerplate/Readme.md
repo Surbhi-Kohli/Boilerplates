@@ -53,3 +53,14 @@ module.exports = {
 - installed webpack-merge to share the common functionality
 - installed webpack-dev-server and added it to start script in package.json, so that we dont have to run ``yarn dev``
 everytime we do a change.
+
+## Commit 6:
+- Added assets folder with an svg image
+- The template file references the svg image
+- The index.html in dist, that gets build, is also able to reference the same assets folder and the svg .
+![Alt text](https://file%252B.vscode-resource.vscode-cdn.net/Users/s0k06tn/Documents/Screenshot%25202024-02-24%2520at%25202.31.27%2520PM.png?version%253D1708765374344)
+
+The index.html from dist loads as follows:
+![Alt text](https://file%252B.vscode-resource.vscode-cdn.net/Users/s0k06tn/Documents/Screenshot%25202024-02-24%2520at%25202.31.39%2520PM.png?version%253D1708765338209)
+
+
