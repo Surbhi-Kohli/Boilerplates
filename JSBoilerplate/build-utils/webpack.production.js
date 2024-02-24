@@ -1,3 +1,4 @@
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = () => ({
     output: {
       filename: "main.[contenthash].js"
@@ -8,6 +9,9 @@ module.exports = () => ({
         use:["style-loader","css-loader"]
       }
     ]
-    }
+    },
+    plugin:[
+      new CleanWebpackPlugin()
+    ]
   });
   
