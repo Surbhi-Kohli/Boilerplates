@@ -14,7 +14,7 @@ module.exports=({ mode, presets } = { mode: "production", presets: [] }) => {
               { test:/\.html$/,
               use:["html-loader"]
             },/**
-            {
+            {//for webpack version less than 5
               test:/\.(svg|png|jpeg|gif)$/,  //$ represents end
               use:{
                 loader:"file-loader",
