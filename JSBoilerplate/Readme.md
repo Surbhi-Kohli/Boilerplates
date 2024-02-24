@@ -58,9 +58,11 @@ everytime we do a change.
 - Added assets folder with an svg image
 - The template file references the svg image
 - The index.html in dist, that gets build, is also able to reference the same assets folder and the svg .
-![Alt text](https://file%252B.vscode-resource.vscode-cdn.net/Users/s0k06tn/Documents/Screenshot%25202024-02-24%2520at%25202.31.27%2520PM.png?version%253D1708765374344)
+
+<img width="836" alt="Screenshot 2024-02-24 at 2 31 27 PM" src="https://github.com/Surbhi-Kohli/Boilerplates/assets/32058209/434f1940-e9c1-4ef4-b123-dda952789d74">
 
 The index.html from dist loads as follows:
-![Alt text](https://file%252B.vscode-resource.vscode-cdn.net/Users/s0k06tn/Documents/Screenshot%25202024-02-24%2520at%25202.31.39%2520PM.png?version%253D1708765338209)
+
+<img width="898" alt="Screenshot 2024-02-24 at 2 31 39 PM" src="https://github.com/Surbhi-Kohli/Boilerplates/assets/32058209/33a04054-4c8b-4840-b9c9-bb0336658ae3">
 
 
