@@ -1,7 +1,7 @@
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = () => ({
     output: {
-      filename: "main.[contenthash].js"
+      filename: "[name].[contenthash].bundle.js"
     },
     module:{
       rules:[
@@ -10,7 +10,7 @@ module.exports = () => ({
       }
     ]
     },
-    plugin:[
+    plugins:[
       new CleanWebpackPlugin()
     ]
   });

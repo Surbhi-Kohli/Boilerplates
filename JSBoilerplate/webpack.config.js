@@ -8,7 +8,11 @@ module.exports=({ mode, presets } = { mode: "production", presets: [] }) => {
   return merge({
     // devtool:"none",//to remove eval from the minified code
         mode,
-        entry:"./src/index.js",
+        entry:{
+          main:"./src/index.js",//msin= name that is read by output config
+          vendor:"./src/vendor.js"//vendor = name
+        },
+      
         module:{
           rules:[
               { test:/\.html$/,
@@ -28,7 +32,7 @@ module.exports=({ mode, presets } = { mode: "production", presets: [] }) => {
           ]
       },
         output:{
-          filename:"main.[contenthash].js",
+          filename:"[name].[contenthash].bundle.js",
           path:path.resolve(__dirname,"dist")
         },
         plugins: [new HtmlWebpackPlugin({

@@ -180,3 +180,14 @@ ie, whenever a file ends with name .html, html-loader will take charge of it.
 It will help in loading svg,png or jpeg.For webpack 5+ : https://webpack.js.org/guides/asset-modules/
 - Added the clean-webpack-plugin to prod config, to genrate a brand new dist on every build.
 We dont need in dev , b'coz we use thedev server that generates files in memory temporarily
+
+
+## Commit 8:Code Splitting
+We need to work on way for webpack to spit out multiple bundles instead of one.We might want to separate our
+own app code and our vendor code.Lets say we have jquery and bootstrap.Those are not gonna change much ,but our main code is gonna change.So we will have 2 different bundles, one of them being vendor.hash.bundle.js.Since the content of the vendor is not gonna change, the hash generated would always be same and hence the browser can cache those files.
+
+Why we need this setup(Code splitting)
+Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.Separating  common modules from bundles allows for those chunks to be loaded once initially and stored in the cache for later use.
+
+We have installed bootstrap, popper and jquery as dev dependencies since, We don't need them to be on our bundle. All our code is being transformed into a bundle that is self-sufficient.
+Check back on this commit for bootstrap rules still not working
