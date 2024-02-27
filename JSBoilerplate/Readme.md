@@ -185,9 +185,13 @@ We dont need in dev , b'coz we use thedev server that generates files in memory 
 ## Commit 8:Code Splitting
 We need to work on way for webpack to spit out multiple bundles instead of one.We might want to separate our
 own app code and our vendor code.Lets say we have jquery and bootstrap.Those are not gonna change much ,but our main code is gonna change.So we will have 2 different bundles, one of them being vendor.hash.bundle.js.Since the content of the vendor is not gonna change, the hash generated would always be same and hence the browser can cache those files.
+- In our Config, we have added 2 entry points, one is main, while other is vendor and hence in the dist 2 js files will be generated.
+main.hash.js will contain our app logic, while vendor.hash.js will contain the whole bootstrap, popper and jquery code.
+We have updated the output value to take name as input instead of it being hardcoded to main
 
 Why we need this setup(Code splitting)
 Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.Separating  common modules from bundles allows for those chunks to be loaded once initially and stored in the cache for later use.
 
+Bootstrap needs popper and jquery, so we have installed those
 We have installed bootstrap, popper and jquery as dev dependencies since, We don't need them to be on our bundle. All our code is being transformed into a bundle that is self-sufficient.
-Check back on this commit for bootstrap rules still not working
+We had to import bootstrap css file's exact path in vendor.js for the bundle to contain complete code.
