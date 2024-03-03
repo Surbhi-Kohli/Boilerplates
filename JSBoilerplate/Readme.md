@@ -103,13 +103,15 @@ const p = document.createElement("p");
 document.body.appendChild(p);
 You are using the Document Object to write to an HTML file. You can also do something like this:
 
-const html = `
+```
+const html = '
   <h1>heading level 1</h1>
-`;
+';
 const header = document.createElement("header");
 header.innerHTML = html;
 
 document.body.appendChild(header);
+```
 The string assigned to the html variable is what's called an HTML string. Simple put, a string that contains HTML markup.
 
 This is part of what the html-loader do: it reads your HTML files and returns their contents as HTML strings that can be understand by JavaScript and used by APIs.
@@ -187,11 +189,47 @@ We need to work on way for webpack to spit out multiple bundles instead of one.W
 own app code and our vendor code.Lets say we have jquery and bootstrap.Those are not gonna change much ,but our main code is gonna change.So we will have 2 different bundles, one of them being vendor.hash.bundle.js.Since the content of the vendor is not gonna change, the hash generated would always be same and hence the browser can cache those files.
 - In our Config, we have added 2 entry points, one is main, while other is vendor and hence in the dist 2 js files will be generated.
 main.hash.js will contain our app logic, while vendor.hash.js will contain the whole bootstrap, popper and jquery code.
-We have updated the output value to take name as input instead of it being hardcoded to main
+- We have updated the output value to take name as input instead of it being hardcoded to main
 
 Why we need this setup(Code splitting)
 Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.Separating  common modules from bundles allows for those chunks to be loaded once initially and stored in the cache for later use.
 
 Bootstrap needs popper and jquery, so we have installed those
-We have installed bootstrap, popper and jquery as dev dependencies since, We don't need them to be on our bundle. All our code is being transformed into a bundle that is self-sufficient.
-We had to import bootstrap css file's exact path in vendor.js for the bundle to contain complete code.
+-We have installed bootstrap, popper and jquery as dev dependencies since, We don't need them to be on our bundle. All our code is being transformed into a bundle that is self-sufficient.
+
+-We had to import bootstrap css file's exact path in vendor.js for the bundle to contain complete code.
+
+## Commit 9: Extract CSS & Minify HTML/CSS/JS
+
+Right now, the css is loaded via javascript, where js contains the giant css string and injects the style tag to html file and adds the css.
+You see that the script tags in html, load our main.js and vendor.js which have details about the styles.
+In production, it is better to have a separate css file rather than waiting for js to inject it.
+We wont prefer to have this separate css file in dev , because it takes time to spit out css files and is faster when u are just developing with the dev server, u dont want it to re compile and rebundle.
+Also listing difference between style tag and link tag usage:
+In HTML, there are two primary ways to include CSS (Cascading Style Sheets) in a document: using the <style> tag and using the tag.
+
+<style> tag:
+The <style> tag is used to define internal CSS within an HTML document. It's typically placed within the section of the HTML document. The CSS rules defined within the <style> tag apply only to the specific document in which they are defined. This method is useful for small, single-page applications or documents where the CSS is unique to that document.
+
+tag:
+The tag is used to link an external CSS file to an HTML document. It's placed within the section of the HTML document. The CSS rules defined in the linked external CSS file can be reused across multiple HTML documents. This method is preferred for larger projects with multiple HTML pages or when you want to separate the CSS code from the HTML for better organization and maintenance.
+
+Performance Difference:
+When it comes to performance, there's generally no significant difference between using the <style> tag and the tag to include CSS. However, there are a few factors to consider: Caching:
+
+When you use the tag to link an external CSS file, the browser can cache the CSS file. Subsequent page loads will then be faster because the cached CSS file doesn't need to be re-downloaded. With the <style> tag, the CSS is included directly within the HTML document, so it cannot be cached separately. This means that the CSS is fetched every time the HTML document is loaded.
+
+Page Load Time:
+
+In some cases, using an external CSS file linked with the tag might lead to faster initial page load times because the browser can start fetching the CSS file while parsing the HTML document. However, for small projects or when the CSS code is minimal, the difference in page load time between using <style> and might not be noticeable.
+
+Code Organization and Maintainability:
+
+Using the tag with an external CSS file promotes better code organization and maintainability, especially for larger projects, as it separates the HTML and CSS code. The <style> tag is more suitable for small-scale projects or cases where the CSS code is specific to a single document. In summary, while there may be subtle differences in performance between using the <style> and tags, the choice between them often depends on factors such as code organization, maintainability, and project size rather than significant performance considerations.
+
+- Once we get css in separate file via mini-css-extract-plugin ,we create a separate file via loader from this plugin.Then we want it to be minified in production.
+- We will use optimize-css-assets-webpack-plugin.
+- For that we add the optimization property.
+-But after we add it, the js files in the dist are not minified.When u build the project, u will get warning that the asset size has exceeded the permissible limit , since our files are not minified.
+- In prod mode, optimization minimizer is by default set to a javascript minifier.But then we overwrite it  by telling it to use the optimize-css-assets-webpack-plugin to minimize our css files.So we fix it by manually specifing to use  TerserPlugin for js minimization.So we have to manually add that back, although we dont need to install it , since it gets installed while installing webpack.
+-To minify html, u can use the existing html webpack plugin.But this plugin is by default in minify to true in production mode.It internally uses html-minifier-terser .You can set additional minification capabilities like removing comments, extra lines, double quotes,etc.

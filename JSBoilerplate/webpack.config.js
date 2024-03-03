@@ -35,9 +35,7 @@ module.exports=({ mode, presets } = { mode: "production", presets: [] }) => {
           filename:"[name].[contenthash].bundle.js",
           path:path.resolve(__dirname,"dist")
         },
-        plugins: [new HtmlWebpackPlugin({
-            template:"./src/template.html",
-        }),
+        plugins: [
         new CleanWebpackPlugin()
       ]
 },
